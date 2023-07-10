@@ -1,6 +1,5 @@
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc, html
 from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 import pandas as pd
@@ -11,7 +10,7 @@ data = pd.read_csv('filtered_US_aidpk.csv')
 
 # Initialize the Dash app
 app = dash.Dash(__name__)
-
+server = app.server
 # Define the app layout
 app.layout = html.Div([
     html.H1("US Foreign Aid Analysis - Interactive Dashboard"),
@@ -43,7 +42,7 @@ app.layout = html.Div([
             id='year-dropdown-3',
             options=[{'label': i, 'value': i} for i in data['Fiscal Year'].unique()],
             value=data['Fiscal Year'].min(),
-            style={'width': '50%', 'margin': '10px auto', 'maxWidth': '300px'}
+            style={'width': '60%', 'margin': '10px auto', 'maxWidth': '300px'}
         ),
         dcc.Graph(id='graph-output-3')
     ])
